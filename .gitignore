@@ -27,3 +27,6 @@ dist-ssr
 .env
 .env.local
 service-account.json
+
+# Roster data (participant names) — not committed
+roster*.csv

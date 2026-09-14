@@ -8,10 +8,12 @@ read-only dashboard of everyone's status.
 ## How it works
 
 - Each individual or team gets a short **access code** (e.g. `AB3XQ`) and a direct link
-  like `/c/AB3XQ`, generated during roster import (see below).
-- No accounts or passwords — anyone with the code/link can open and update the punchcard.
-  This is intentionally simple/"dummy-proof" for a casual community race, not a
-  high-security system. Don't put anything truly sensitive in it.
+  like `/c/AB3XQ`, generated during roster import (see below). Runners don't need to know
+  or type this code — the landing page (`/`) lists every team (expand to see its
+  members) and individual so people can just tap their name to open their punchcard.
+- No accounts or passwords — anyone can open and update a punchcard. This is
+  intentionally simple/"dummy-proof" for a casual community race, not a high-security
+  system. Don't put anything truly sensitive in it.
 - The 8 item categories (roller, bakery, Big Q drink, candy, pickle, chips, fruit, QT
   kitchen item) are **not** tied to a specific stop number — at each of the 8 QT stops,
   the runner/team picks any one *unused* category to eat, in QT-stop order. All 8 must
@@ -23,7 +25,7 @@ read-only dashboard of everyone's status.
 
 ## Screens
 
-- `/` — enter your access code
+- `/` — browse teams (tap to expand and pick your name) and individual participants
 - `/c/:code` — the punchcard (checklist, active-runner picker, notes, trash-pickup bonus
   counter, elapsed time, DQ/tap-out controls)
 - `/marshal` — Field Marshal dashboard (progress table, emergency contact/medical info,
@@ -71,14 +73,19 @@ npm run dev
 Export your signup Google Sheet to CSV with these columns (header row required, extra
 columns are ignored):
 
-| Name | Type | Members | EmergencyContact | MedicalNotes | Code |
-|------|------|---------|-------------------|--------------|------|
-| Loboto | individual | | Jane Doe 555-1234 | none | |
-| Team Ferrari | team | Loboto; Dorothy; Skeletor | | | |
+| Name | Type | Members | Code |
+|------|------|---------|------|
+| Loboto | individual | | |
+| Team Ferrari | team | Loboto; Dorothy; Skeletor | |
 
 - `Type`: `individual` or `team` (defaults to individual)
-- `Members`: semicolon-separated teammate names (teams only)
-- `Code`: leave blank to auto-generate a short code, or set your own
+- `Members`: semicolon-separated teammate names (teams only) — these show up as
+  tappable names under the team on the landing page
+- `Code`: leave blank to auto-generate a short code, or set your own. Codes are only
+  used internally for the `/c/:code` URL — runners never need to type them, since the
+  landing page lets them tap their team/name directly.
+- `EmergencyContact` / `MedicalNotes` columns are still supported if you want to track
+  that info for the Marshal Dashboard, but are optional and can be omitted entirely.
 
 Then:
 
