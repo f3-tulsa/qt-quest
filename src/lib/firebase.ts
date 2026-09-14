@@ -5,6 +5,7 @@ import {
   persistentSingleTabManager,
 } from 'firebase/firestore';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+import { isSupported as analyticsSupported, getAnalytics } from 'firebase/analytics';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -13,9 +14,22 @@ const firebaseConfig = {
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 export const app = initializeApp(firebaseConfig);
+
+// Analytics is optional — only set up if a measurementId is configured and
+// the browser environment supports it (e.g. not during SSR/build).
+if (firebaseConfig.measurementId) {
+  analyticsSupported()
+    .then((supported) => {
+      if (supported) getAnalytics(app);
+    })
+    .catch(() => {
+      /* analytics is best-effort only, safe to ignore failures */
+    });
+}
 
 // Offline persistence so a flaky QT/parking-lot WiFi doesn't lose a checkoff —
 // it queues locally and syncs once back online.

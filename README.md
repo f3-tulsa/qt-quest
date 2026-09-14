@@ -31,6 +31,11 @@ read-only dashboard of everyone's status.
 
 ## One-time setup
 
+> **Status:** The `qt-quest` Firebase project is already created, with Firestore and
+> Anonymous Auth enabled, and its config is already in `.env.local` locally. Steps 1–2
+> below are done — jump to [Deploy to Vercel](#5-deploy-to-vercel) to add the same env
+> vars there.
+
 ### 1. Create a Firebase project
 
 1. Go to the [Firebase console](https://console.firebase.google.com/) → **Add project**.
@@ -38,7 +43,9 @@ read-only dashboard of everyone's status.
 3. Enable **Authentication → Sign-in method → Anonymous**. (Used only as a soft gate on
    emergency-contact data — see [Security notes](#security-notes) below.)
 4. In **Project settings → General → Your apps**, add a Web app and copy the config
-   values.
+   values. If you enabled Google Analytics for the project, also copy the
+   `measurementId` — the app uses it optionally (`VITE_FIREBASE_MEASUREMENT_ID`) and
+   works fine without it.
 5. Deploy the security rules in [`firestore.rules`](./firestore.rules) (Firestore →
    Rules tab, paste and publish — or use the Firebase CLI: `firebase deploy --only
    firestore:rules`).
@@ -94,7 +101,8 @@ Late sign-ups after the CSV import can be added directly from the `/marshal` das
 1. Push this repo to GitHub, then import it in [Vercel](https://vercel.com/new).
 2. Framework preset: **Vite**. Build command/output are auto-detected.
 3. Add the same environment variables from `.env.local` in the Vercel project settings
-   (Settings → Environment Variables).
+   (Settings → Environment Variables) — all six `VITE_FIREBASE_*` values (including
+   `VITE_FIREBASE_MEASUREMENT_ID` if set) plus `VITE_MARSHAL_CODE`.
 4. Deploy. Re-run the roster import with the real Vercel URL so the printed links are
    correct (or re-print links from the marshal dashboard using each code).
 
