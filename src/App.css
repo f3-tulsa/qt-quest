@@ -1,0 +1,168 @@
+.page {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.header {
+  text-align: center;
+  padding: 8px 0 4px;
+}
+
+.header .subtitle {
+  color: var(--text);
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn.secondary {
+  background: var(--accent-bg);
+  color: var(--accent-dark);
+}
+
+.btn.small {
+  width: auto;
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+}
+
+.item-row.checked {
+  background: var(--ok-bg);
+  border-color: var(--ok);
+}
+
+.item-row .check {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.item-row.checked .check {
+  border-color: var(--ok);
+  background: var(--ok);
+  color: #fff;
+}
+
+.item-row .label {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.item-row .detail {
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.item-row .meta {
+  margin-left: auto;
+  text-align: right;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.badge.ok {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.badge.warn {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+.badge.danger {
+  background: var(--accent-bg);
+  color: var(--danger);
+}
+
+.progress-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.progress-bar .fill {
+  height: 100%;
+  background: var(--ok);
+}
+
+table.dash {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+table.dash th,
+table.dash td {
+  text-align: left;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.note {
+  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--accent-bg);
+}
