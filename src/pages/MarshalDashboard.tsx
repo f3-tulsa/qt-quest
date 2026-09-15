@@ -1,4 +1,6 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
+import ItemIcon from '../components/ItemIcon';
+import { buildConsumptionOrder } from '../lib/consumptionOrder';
 import { STOPS } from '../lib/items';
 import {
   createParticipant,
@@ -208,6 +210,95 @@ export default function MarshalDashboard() {
             })}
           </tbody>
         </table>
+      </div>
+
+      <div className="card">
+        <h2>Consumption order</h2>
+        <p className="card-description">
+          Each row shows what a participant consumed at stops 1-8.
+        </p>
+        {participants.length === 0 ? (
+          <p className="empty-state">No participants to compare yet.</p>
+        ) : (
+          <div className="consumption-table-wrap">
+            <table className="consumption-table">
+              <thead>
+                <tr>
+                  <th scope="col">Participant</th>
+                  {STOPS.map((stop) => (
+                    <th key={stop.stop} scope="col">
+                      Stop {stop.stop}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {participants.map((participant) => {
+                  const order = buildConsumptionOrder(participant.itemLog ?? []);
+                  return (
+                    <tr key={participant.code}>
+                      <th scope="row">
+                        <span>{participant.name}</span>
+                        {order.invalidStopCount > 0 && (
+                          <span
+                            className="data-warning"
+                            title={`${order.invalidStopCount} log entries have invalid stop numbers`}
+                          >
+                            Check log
+                          </span>
+                        )}
+                      </th>
+                      {STOPS.map((stop) => {
+                        const cell = order.byStop.get(stop.stop);
+                        if (!cell) {
+                          return (
+                            <td key={stop.stop} className="consumption-empty">
+                              <span className="sr-only">Not yet consumed</span>
+                              <span aria-hidden="true">—</span>
+                            </td>
+                          );
+                        }
+
+                        if (!cell.item) {
+                          return (
+                            <td key={stop.stop}>
+                              <span className="unknown-item">Unknown item</span>
+                              {cell.duplicateCount > 1 && (
+                                <span className="data-warning">
+                                  {cell.duplicateCount} logs
+                                </span>
+                              )}
+                            </td>
+                          );
+                        }
+
+                        return (
+                          <td key={stop.stop}>
+                            <div
+                              className="consumption-item"
+                              title={`${cell.item.label} · ${cell.entry.by}`}
+                            >
+                              <ItemIcon icon={cell.item.icon} />
+                              <span>{cell.item.shortLabel}</span>
+                            </div>
+                            {cell.duplicateCount > 1 && (
+                              <span
+                                className="data-warning"
+                                title="Multiple consumption entries were recorded for this stop"
+                              >
+                                {cell.duplicateCount} logs
+                              </span>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       <div className="card">

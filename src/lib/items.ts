@@ -3,53 +3,82 @@
 export interface ItemDef {
   key: string;
   label: string;
+  shortLabel: string;
+  icon: ItemIconName;
   detail: string;
 }
+
+export type ItemIconName =
+  | 'roller'
+  | 'bakery'
+  | 'drink'
+  | 'candy'
+  | 'pickle'
+  | 'chips'
+  | 'fruit'
+  | 'kitchen';
 
 export const ITEMS: ItemDef[] = [
   {
     key: 'roller',
     label: 'Roller item',
+    shortLabel: 'Roller',
+    icon: 'roller',
     detail: 'Hotdog w/ bun, corndog, taquito, etc. (edible wrap/bun required)',
   },
   {
     key: 'bakery',
     label: 'Bakery item',
+    shortLabel: 'Bakery',
+    icon: 'bakery',
     detail: 'Donut, muffin, or equivalent sized item',
   },
   {
     key: 'drink',
     label: 'Big Q fountain drink',
+    shortLabel: 'Drink',
+    icon: 'drink',
     detail: 'From the fountain drink section — cannot be water',
   },
   {
     key: 'candy',
     label: 'Regular size candy',
+    shortLabel: 'Candy',
+    icon: 'candy',
     detail: 'Standard sized KitKat, Snickers, Skittles, M&Ms, etc.',
   },
   {
     key: 'pickle',
     label: 'Pickle',
+    shortLabel: 'Pickle',
+    icon: 'pickle',
     detail: 'Single pickle or packaged pickle slices',
   },
   {
     key: 'chips',
     label: 'Regular size bag of chips',
+    shortLabel: 'Chips',
+    icon: 'chips',
     detail: 'Cheetos, Lays, Fritos, Funyuns, Takis, etc.',
   },
   {
     key: 'fruit',
     label: 'Fruit',
+    shortLabel: 'Fruit',
+    icon: 'fruit',
     detail: 'Banana, apple, orange, or full container of mixed fruit',
   },
   {
     key: 'kitchen',
     label: 'QT Kitchen item',
+    shortLabel: 'Kitchen',
+    icon: 'kitchen',
     detail: 'Any made-to-order breakfast food or entree — NOT grab n go',
   },
 ];
 
 export const ITEM_KEYS = ITEMS.map((i) => i.key);
+export const ITEMS_BY_KEY = new Map(ITEMS.map((item) => [item.key, item]));
 
 // The 8 QT stops in required route order, plus the shared start/finish location.
 export interface StopDef {
