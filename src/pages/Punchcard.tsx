@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ItemIcon from '../components/ItemIcon';
 import { ITEMS } from '../lib/items';
 import {
   addNote,
@@ -196,6 +197,7 @@ export default function Punchcard() {
           return (
             <div key={item.key} className={`item-row ${checked ? 'checked' : ''}`}>
               <div className="check">{checked ? '✓' : ''}</div>
+              <ItemIcon icon={item.icon} />
               <div style={{ flex: 1 }}>
                 <div className="label">{item.label}</div>
                 <div className="detail">{item.detail}</div>

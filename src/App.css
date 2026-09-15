@@ -89,6 +89,28 @@
   font-weight: 700;
 }
 
+.item-icon {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-bg);
+  color: var(--accent-dark);
+}
+
+.item-icon svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .item-row.checked .check {
   border-color: var(--ok);
   background: var(--ok);
@@ -158,6 +180,118 @@ table.dash td {
   text-align: left;
   padding: 8px 6px;
   border-bottom: 1px solid var(--border);
+}
+
+.card-description,
+.empty-state {
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.card-description {
+  margin-bottom: 12px;
+}
+
+.consumption-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+table.consumption-table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12px;
+}
+
+table.consumption-table th,
+table.consumption-table td {
+  min-width: 90px;
+  padding: 10px 8px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  vertical-align: middle;
+}
+
+table.consumption-table th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 140px;
+  max-width: 180px;
+  background: var(--card-bg);
+  text-align: left;
+}
+
+table.consumption-table thead th {
+  background: var(--accent-bg);
+  color: var(--text-h);
+}
+
+table.consumption-table thead th:first-child {
+  z-index: 2;
+  background: var(--accent-bg);
+}
+
+table.consumption-table tr:last-child th,
+table.consumption-table tr:last-child td {
+  border-bottom: 0;
+}
+
+table.consumption-table th:last-child,
+table.consumption-table td:last-child {
+  border-right: 0;
+}
+
+.consumption-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+.consumption-item .item-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.consumption-item .item-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.consumption-empty {
+  color: var(--border);
+  font-size: 18px;
+}
+
+.unknown-item,
+.data-warning {
+  display: block;
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.data-warning {
+  margin-top: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .note {

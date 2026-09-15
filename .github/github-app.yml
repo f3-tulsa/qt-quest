@@ -1,0 +1,10 @@
+scripts:
+  - name: Setup
+    command: npm ci --no-audit --no-fund
+    triggers:
+      - session.create
+  - name: Run
+    command: npm run dev -- --host 127.0.0.1
+
+server_ready_pattern: 'Local:\s+(https?://\S+)'
+auto_open_in_browser: true
